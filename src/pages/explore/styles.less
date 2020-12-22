@@ -1,0 +1,96 @@
+.exploreBar {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.searchWrapper {
+  padding: 15px;
+  min-width: 100%;
+}
+
+.searchField {
+  //margin: 5px !important;
+  background: #efefef;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.searchResultsWrapper {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 15px;
+  margin-left: -15px;
+  padding: 0px 20px;
+}
+
+.chipsWrapper {
+  white-space: nowrap;
+  overflow: auto;
+  max-width: 100%;
+  padding: 0px 15px 7px;
+  margin-top: -8px;
+}
+
+/* OneLineGridList */
+.oneLineGridListWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+  padding: 5px 0px;
+}
+
+.oneLineGridHeader {
+  width: 100%;
+  padding: 5px 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.oneLineGridList {
+  //flex-wrap: nowrap !important;
+  padding: 0px 25px !important;
+  display: inline !important;
+  white-space: nowrap;
+}
+
+.oneLineGridTile {
+  //height: 100%;
+  display: inline-block;
+}
+
+.oneLineGridTile:first-of-type {
+  margin-left: 0;
+}
+
+.oneLineGridTile:last-of-type {
+  margin-right: 0;
+}
+
+.oneLineGridTileImage {
+  width: 100%;
+  //height: 100px;
+}
+
+:global {
+  .MuiChip-root.MuiChip-sizeSmall {
+    margin: 0 2.5px;
+    border-radius: 8px;
+  }
+
+  .MuiChip-root.MuiChip-sizeSmall:first-of-type {
+    margin-left: 0;
+  }
+
+  .MuiChip-root.MuiChip-sizeSmall:last-of-type {
+    margin-right: 0;
+  }
+
+  [class*="oneLineGridTile"] > .MuiGridListTile-tile {
+    //padding-top: 100%;
+    border-radius: 8px;
+  }
+}
