@@ -14,7 +14,15 @@ const HomePage = () => {
 
     request("/me/top/tracks?limit=10&time_range=short_term").then(response => {
       const trackAlbums = [];
-      response.items.map((track: any) => trackAlbums.push(track.album));
+      response.items.map((track: any) => {
+        if (
+          trackAlbums.find((album: any) => {
+            return album.id == track.album.id;
+          }) == undefined
+        ) {
+          trackAlbums.push(track.album);
+        }
+      });
       setTopAlbums(trackAlbums);
     });
   }, []);
