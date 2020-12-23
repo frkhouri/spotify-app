@@ -29,8 +29,12 @@ const HomePage = () => {
 
   return (
     <>
-      <SmallCardList items={topArtists} heading="Your favourite artists" />
-      <CardGrid items={topAlbums} heading="Recommended" />
+      <SmallCardList
+        items={topArtists}
+        heading="Your favourite artists"
+        size="tall"
+      />
+      <SmallCardList items={topAlbums} heading="Recommended" size="small" />
     </>
   );
 };

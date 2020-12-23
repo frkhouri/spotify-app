@@ -119,17 +119,31 @@
 /* SmallSquareCard */
 
 .smallSquareCard {
-  width: 100%;
-  border-radius: 14px !important;
+  width: 150px;
+  margin: 0 3px;
   border-style: none !important;
+  display: inline-block;
+}
+
+.smallSquareCard:first-of-type {
+  margin-left: 0;
+}
+
+.smallSquareCard:last-of-type {
+  margin-right: 0;
 }
 
 .smallSquareCardImage {
   padding-top: 100%;
+  border-radius: 14px !important;
 }
 
 .smallSquareCardInfoWrapper {
   padding: 10px;
+}
+
+.smallSquareCardInfoWrapper > span {
+  text-overflow: ellipsis;
 }
 
 .smallSquareCardTitle {

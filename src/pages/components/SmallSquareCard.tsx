@@ -4,7 +4,7 @@ import { history } from "umi";
 
 import styles from "./styles.less";
 
-type SmallCardProps = {
+type SmallSquareCardProps = {
   item: {
     id: string;
     name: string;
@@ -14,10 +14,10 @@ type SmallCardProps = {
   };
 };
 
-const SmallCard = ({ item }: SmallCardProps) => {
+const SmallSquareCard = ({ item }: SmallSquareCardProps) => {
   return (
-    <>
-      <Card key={item.id} variant="outlined" className={styles.smallSquareCard}>
+    <div className={styles.smallSquareCard}>
+      <Card key={item.id} variant="elevation" elevation={0}>
         <CardActionArea
           onClick={() => history.push(`/${item.type}s/${item.id}`)}
         >
@@ -49,8 +49,8 @@ const SmallCard = ({ item }: SmallCardProps) => {
           </Typography>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default SmallCard;
+export default SmallSquareCard;
