@@ -23,7 +23,7 @@ const SmallSquareCard = ({ item }: SmallSquareCardProps) => {
         >
           <CardMedia
             title={item.name}
-            image={item.images[0].url}
+            image={item.images ? item.images[0].url : item.album.images[0].url}
             className={styles.smallSquareCardImage}
           />
         </CardActionArea>
@@ -39,7 +39,7 @@ const SmallSquareCard = ({ item }: SmallSquareCardProps) => {
         >
           {item.name}
         </Typography>
-        {item.type == "album" && (
+        {
           <Typography
             variant="caption"
             align="center"
@@ -47,7 +47,7 @@ const SmallSquareCard = ({ item }: SmallSquareCardProps) => {
           >
             {item.artists?.map((artist: object) => artist.name).join(", ")}
           </Typography>
-        )}
+        }
       </div>
     </div>
   );

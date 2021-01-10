@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { request } from "umi";
 
-import CardGrid from "@/pages/components/CardGrid";
 import SmallCardList from "@/pages/components/SmallCardList";
 import ExploreBar from "./components/ExploreBar";
 import OneLineGridList from "./components/OneLineGridList";
@@ -73,11 +72,11 @@ const ExplorePage = () => {
         >
           PLAY ALL
         </Button>
+        <ExploreGrid recentTrackIds={recentTrackIds} />
         <ListHeading heading="Featured" />
         {featuredPlaylists.map(playlist => (
           <OneLineGridList item={playlist} />
         ))}
-        <ExploreGrid recentTrackIds={recentTrackIds} />
       </div>
     </>
   );

@@ -14,7 +14,7 @@ const CardGrid = ({ items, heading }: CardGridProps) => {
   return (
     <>
       {heading && <ListHeading heading={heading} />}
-      <Grid container spacing={2} style={{ padding: "15px", width: "100%" }}>
+      <Grid container spacing={2} style={{ width: "100%" }}>
         {items.map(
           (item: object) =>
             item.name && (
