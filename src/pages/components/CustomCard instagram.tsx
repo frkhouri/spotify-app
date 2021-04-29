@@ -12,7 +12,7 @@ import {
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareIcon from "@material-ui/icons/Share";
-import { history, request } from "umi";
+import { history } from "umi";
 
 import styles from "./styles.less";
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { request } from "umi";
 
+import apiRequest from "@/utils/request";
 import CardGrid from "@/pages/components/CardGrid";
 
 const ExplorePage = () => {
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
-    request("/browse/new-releases?country=CA").then(response =>
-      setAlbums(response.albums.items)
-    );
+    apiRequest({
+      endpoint: "/browse/new-releases?country=CA"
+    }).then(response => setAlbums(response.albums.items));
   }, []);
 
   return (

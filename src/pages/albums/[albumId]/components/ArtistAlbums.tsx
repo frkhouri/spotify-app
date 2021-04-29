@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { List } from '@material-ui/core';
-import { history, request } from 'umi';
+import { history } from 'umi';
 
+import apiRequest from '@/utils/request';
 import ItemList from '@/pages/components/ItemList';
 
 type ArtistAlbumsProps = {
@@ -27,7 +28,9 @@ const ArtistAlbums = ({ album, artists }: ArtistAlbumsProps) => {
             const returnedArtistAlbums = [];
 
             artists.forEach((artist: object, index: number) => {
-                request(`/artists/${artist.id}/albums?country=from_token&limit=50&include_groups=album`)
+                apiRequest({
+                    endpoint: `/artists/${artist.id}/albums?country=from_token&limit=50&include_groups=album`
+                })
                     .then(response => {
                         var arr = [];
                         response.items.reduce((_, item) => {
