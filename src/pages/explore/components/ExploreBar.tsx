@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, InputBase, Toolbar } from "@material-ui/core";
-import { history, request } from "umi";
+import { history } from "umi";
 
+import apiRequest from "@/utils/request";
 import styles from "../styles.less";
 import CategoryChip from "./CategoryChip";
 
@@ -11,9 +12,9 @@ const ExploreBar = ({}: ExploreBarProps) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    request("/browse/categories?country=from_token").then(response =>
-      setCategories(response.categories.items)
-    );
+    apiRequest({
+      endpoint: "/browse/categories?country=from_token"
+    }).then(response => setCategories(response.categories.items));
   }, []);
 
   return (

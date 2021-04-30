@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
-import { request } from "umi";
 
+import apiRequest from "@/utils/request";
 import SmallCardList from "@/pages/components/SmallCardList";
 import ExploreBar from "./components/ExploreBar";
 import OneLineGridList from "./components/OneLineGridList";
@@ -21,11 +21,13 @@ const ExplorePage = () => {
     const uris = [];
     tracks.map((track: object) => uris.push(track.uri));
 
-    request("/me/player/shuffle?state=false", {
+    apiRequest({
+      endpoint: "/me/player/shuffle?state=false",
       method: "put"
     });
 
-    request("/me/player/play", {
+    apiRequest({
+      endpoint: "/me/player/play",
       method: "put",
       data: {
         uris: uris
@@ -35,7 +37,9 @@ const ExplorePage = () => {
 
   useEffect(() => {
     if (loadingRecent) {
-      request("/me/player/recently-played?limit=5").then(response => {
+      apiRequest({
+        endpoint: "/me/player/recently-played?limit=5"
+      }).then(response => {
         setRecentTrackIds(
           response.items.map((item: object) => item.track.id).join(",")
         );
@@ -45,15 +49,15 @@ const ExplorePage = () => {
     }
 
     if (recentTrackIds) {
-      request(
-        `/recommendations?seed_tracks=${recentTrackIds}&min_popularity=20`
-      ).then(response => setRecommendedTracks(response.tracks));
+      apiRequest({
+        endpoint: `/recommendations?seed_tracks=${recentTrackIds}&min_popularity=20`
+      }).then(response => setRecommendedTracks(response.tracks));
     }
 
     if (loadingFeaturedPlaylists) {
-      request("/browse/featured-playlists?country=CA&limit=5").then(response =>
-        setFeaturedPlaylists(response?.playlists.items)
-      );
+      apiRequest({
+        endpoint: "/browse/featured-playlists?country=CA&limit=5"
+      }).then(response => setFeaturedPlaylists(response?.playlists.items));
       setLoadingFeaturedPlaylists(false);
     }
   }, [recentTrackIds]);

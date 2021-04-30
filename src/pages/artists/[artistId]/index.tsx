@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { request, useParams } from 'umi';
+import { useParams } from 'umi';
 
+import apiRequest from '@/utils/request';
 import ImageHeader from '@/pages/components/ImageHeader';
 import CustomTabs from '@/pages/components/CustomTabs';
 import TopTracks from './components/TopTracks';
@@ -28,13 +29,19 @@ const ArtistPage = () => {
 
     useEffect(() => {
         !artist.name ? (
-            request(`/artists/${artistId}`)
+            apiRequest({
+                endpoint: `/artists/${artistId}`
+            })
                 .then(response => setArtist(response)),
 
-            request(`/artists/${artistId}/top-tracks?country=from_token`)
+            apiRequest({
+                endpoint: `/artists/${artistId}/top-tracks?country=from_token`
+            })
                 .then(response => setTopTracks(response.tracks)),
 
-            request(`/artists/${artistId}/albums?country=from_token&limit=50&include_groups=album`)
+            apiRequest({
+                endpoint: `/artists/${artistId}/albums?country=from_token&limit=50&include_groups=album`
+            })
                 .then(response => {
                     var arr = [];
                     response.items.reduce((_, item) => {
@@ -46,7 +53,9 @@ const ArtistPage = () => {
                     }, response.items[0])
                 })
         ) : (
-            request(`/search?q=this%20is%20${artist.name}&type=playlist&limit=1`)
+            apiRequest({
+                endpoint: `/search?q=this%20is%20${artist.name}&type=playlist&limit=1`
+            })
                 .then(response => {
                     if (response.playlists.items[0].owner.id == 'spotify' && response.playlists.items[0].name == `This Is ${artist.name}`) {
                         setThisIsPlaylist(response.playlists.items[0]);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { request, useParams } from 'umi';
+import { useParams } from 'umi';
 
+import apiRequest from '@/utils/request';
 import ImageHeader from '@/pages/components/ImageHeader';
 import CustomTabs from '@/pages/components/CustomTabs';
 import CardGrid from '@/pages/components/CardGrid';
@@ -15,9 +16,13 @@ const CategoryPage = () => {
     ];
 
     useEffect(() => {
-            request(`/browse/categories/${categoryId}?country=from_token`)
+            apiRequest({
+                endpoint: `/browse/categories/${categoryId}?country=from_token`
+            })
                 .then(response => setCategory(response));
-            request(`/browse/categories/${categoryId}/playlists?country=from_token`)
+            apiRequest({
+                endpoint: `/browse/categories/${categoryId}/playlists?country=from_token`
+            })
                 .then(response => setPlaylists(response.playlists.items));
     }, []);
 

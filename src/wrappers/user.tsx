@@ -22,5 +22,15 @@ export default (props: Props) => {
     }
   }, [hashParams.access_token]);
 
+  /*useEffect(() => {
+    const accessToken = localStorage.get('accessToken');
+
+  if (!accessToken) {
+    history.replace('/login');
+  }
+
+  return;
+  }*/
+
   return <div>{props.children}</div>;
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { request } from "umi";
 
+import apiRequest from "@/utils/request";
 import SmallCardList from "../components/SmallCardList";
 import GenreCardList from "./components/GenreCardList";
 
@@ -11,30 +11,32 @@ const HomePage = () => {
 
   useEffect(() => {
     topArtists.length == 0 &&
-      request("/me/top/artists?limit=10&time_range=short_term").then(
-        (response: any) => {
-          const genres = [];
-          const sampleGenres = [];
+      apiRequest({
+        endpoint: "/me/top/artists?limit=10&time_range=short_term"
+      }).then((response: any) => {
+        const genres = [];
+        const sampleGenres = [];
 
-          setTopArtists(response.items);
-          response.items.map((artist: any) => {
-            artist.genres.forEach((genre: string) => {
-              if (!genres.includes(genre)) {
-                genres.push(genre);
-              }
-            });
-          });
-          while (sampleGenres.length < 5) {
-            const genre = genres[Math.floor(Math.random() * genres.length)];
-            if (!sampleGenres.includes(genre)) {
-              sampleGenres.push(genre);
+        setTopArtists(response.items);
+        response.items.map((artist: any) => {
+          artist.genres.forEach((genre: string) => {
+            if (!genres.includes(genre)) {
+              genres.push(genre);
             }
+          });
+        });
+        while (sampleGenres.length < 5) {
+          const genre = genres[Math.floor(Math.random() * genres.length)];
+          if (!sampleGenres.includes(genre)) {
+            sampleGenres.push(genre);
           }
-          setTopGenres(sampleGenres);
         }
-      );
+        setTopGenres(sampleGenres);
+      });
 
-    request("/me/top/tracks?limit=10&time_range=short_term").then(response => {
+    apiRequest({
+      endpoint: "/me/top/tracks?limit=10&time_range=short_term"
+    }).then(response => {
       const trackAlbums = [];
       response.items.map((track: any) => {
         if (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GridList, GridListTile } from "@material-ui/core";
-import { request } from "umi";
 
+import apiRequest from "@/utils/request";
 import ListHeading from "@/pages/components/ListHeading";
 import OneLineGridTile from "./OneLineGridTile";
 
@@ -14,9 +14,9 @@ const ExploreGrid = ({ recentTrackIds }: ExploreGridProps) => {
 
   useEffect(() => {
     recentTrackIds &&
-      request(
-        `/recommendations?seed_tracks=${recentTrackIds}&max_popularity=40&limit=9`
-      ).then(response => setTracks(response.tracks));
+      apiRequest({
+        endpoint: `/recommendations?seed_tracks=${recentTrackIds}&max_popularity=40&limit=9`
+      }).then(response => setTracks(response.tracks));
   }, [recentTrackIds]);
 
   return (
