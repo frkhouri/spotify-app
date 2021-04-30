@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 import SmallCardList from "../components/SmallCardList";
 import GenreCardList from "./components/GenreCardList";
 
@@ -11,7 +11,7 @@ const HomePage = () => {
 
   useEffect(() => {
     topArtists.length == 0 &&
-      apiRequest({
+      ApiRequest({
         endpoint: "/me/top/artists?limit=10&time_range=short_term"
       }).then((response: any) => {
         const genres = [];
@@ -34,7 +34,7 @@ const HomePage = () => {
         setTopGenres(sampleGenres);
       });
 
-    apiRequest({
+    ApiRequest({
       endpoint: "/me/top/tracks?limit=10&time_range=short_term"
     }).then(response => {
       const trackAlbums = [];

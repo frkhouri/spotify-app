@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { List } from '@material-ui/core';
 import { useParams } from 'umi';
 
-import apiRequest from '@/utils/request';
+import ApiRequest from '@/utils/request';
 import CustomTabs from '@/pages/components/CustomTabs';
 import ImageHeader from '@/pages/components/ImageHeader';
 import ItemList from '@/pages/components/ItemList';
@@ -50,13 +50,13 @@ const PlaylistPage = () => {
 
     useEffect(() => {
         if (!playlist.tracks) {
-            apiRequest({
+            ApiRequest({
                 endpoint: `/playlists/${playlistId}`
             })
                 .then(response => setPlaylist(response));
         } else {
             const sampleTracks = selectSample(playlist);
-            apiRequest({
+            ApiRequest({
                 endpoint: '/recommendations?seed_tracks=' + sampleTracks
             })
                 .then(response => setRecommendedTracks(response.tracks));

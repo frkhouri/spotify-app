@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 import CustomTabs from "@/pages/components/CustomTabs";
 import CardGrid from "@/pages/components/CardGrid";
 import UserHeader from "../components/UserHeader";
@@ -15,15 +15,15 @@ const MePage = () => {
   const tabContents = [<CardGrid items={playlists} />, "artists", "albums"];
 
   useEffect(() => {
-    apiRequest({
+    ApiRequest({
       endpoint: "/me"
     }).then(response => setUser(response));
 
-    apiRequest({
+    ApiRequest({
       endpoint: "/me/playlists?limit=50"
     }).then(response => setPlaylists(response.items));
 
-    /*apiRequest({
+    /*ApiRequest({
       endpoint: '/me/following?type=artist'
     })
             .then(response => console.log(response));*/

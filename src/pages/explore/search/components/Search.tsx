@@ -3,7 +3,7 @@ import { Grid, InputBase } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { history } from "umi";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 import styles from "../../styles.less";
 import SearchResults from "./SearchResults";
 
@@ -16,7 +16,7 @@ const Search = () => {
     setTimer(
       setTimeout(() => {
         query &&
-          apiRequest({
+          ApiRequest({
             endpoint: `/search?q=${query}&type=album,artist,playlist,track&limit=5`
           }).then(response => setResults(response));
       }, 300)

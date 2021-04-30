@@ -1,7 +1,8 @@
 import React from 'react';
 import { List } from '@material-ui/core';
 
-import apiRequest from '@/utils/request';
+import ApiRequest from '@/utils/request';
+import Play from '@/utils/play';
 import ItemList from '@/pages/components/ItemList';
 import ListHeading from '@/pages/components/ListHeading';
 
@@ -20,16 +21,12 @@ const TopTracks = ({ tracks }: TopTracksProps) => {
       },
     };
 
-    apiRequest({
+    ApiRequest({
       endpoint: '/me/player/shuffle?state=false',
       method: 'put',
     });
 
-    apiRequest({
-      endpoint: `/me/player/play`,
-      method: 'put',
-      body: JSON.stringify(body),
-    });
+    Play(body);
   };
 
   return (

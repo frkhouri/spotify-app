@@ -1,10 +1,13 @@
 import { extend } from "umi-request";
 
-const getAccessToken = () => localStorage.getItem("token");
+type ApiRequestProps = {
+  endpoint: string;
+  method?: string;
+  body?: any;
+};
 
-export const apiRequest = ({ endpoint, method, body }) => {
-  const token = getAccessToken();
-  console.log(endpoint);
+export const ApiRequest = ({ endpoint, method, body }: ApiRequestProps) => {
+  const token = localStorage.getItem("token");
 
   const request = extend({
     headers: {
@@ -18,4 +21,4 @@ export const apiRequest = ({ endpoint, method, body }) => {
   return request(endpoint, {});
 };
 
-export default apiRequest;
+export default ApiRequest;

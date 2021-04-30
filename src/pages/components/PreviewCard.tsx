@@ -14,7 +14,7 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { history } from "umi";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 import Blank from "@/assets/blank.png";
 import ReactPlayer from "react-player";
 import PreviewCardMenu from "./PreviewCardMenu";
@@ -41,7 +41,7 @@ const PreviewCard = ({ track }: PreviewCardProps) => {
   const [menuOpen, setMenuOpen] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
-    apiRequest({
+    ApiRequest({
       endpoint: `/me/tracks/contains?ids=${track.id}`
     }).then(response => setLiked(response[0]));
   }, []);

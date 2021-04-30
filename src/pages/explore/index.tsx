@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 
-import apiRequest from "@/utils/request";
+import Play from "@/utils/play";
+import ApiRequest from "@/utils/request";
 import SmallCardList from "@/pages/components/SmallCardList";
 import ExploreBar from "./components/ExploreBar";
 import OneLineGridList from "./components/OneLineGridList";
@@ -21,23 +22,21 @@ const ExplorePage = () => {
     const uris = [];
     tracks.map((track: object) => uris.push(track.uri));
 
-    apiRequest({
+    ApiRequest({
       endpoint: "/me/player/shuffle?state=false",
       method: "put"
     });
 
-    apiRequest({
-      endpoint: "/me/player/play",
-      method: "put",
-      data: {
-        uris: uris
-      }
-    });
+    const body = {
+      uris: uris
+    };
+
+    Play(body);
   };
 
   useEffect(() => {
     if (loadingRecent) {
-      apiRequest({
+      ApiRequest({
         endpoint: "/me/player/recently-played?limit=5"
       }).then(response => {
         setRecentTrackIds(
@@ -49,13 +48,13 @@ const ExplorePage = () => {
     }
 
     if (recentTrackIds) {
-      apiRequest({
+      ApiRequest({
         endpoint: `/recommendations?seed_tracks=${recentTrackIds}&min_popularity=20`
       }).then(response => setRecommendedTracks(response.tracks));
     }
 
     if (loadingFeaturedPlaylists) {
-      apiRequest({
+      ApiRequest({
         endpoint: "/browse/featured-playlists?country=CA&limit=5"
       }).then(response => setFeaturedPlaylists(response?.playlists.items));
       setLoadingFeaturedPlaylists(false);
