@@ -1,7 +1,8 @@
 import React from "react";
 import ShuffleIcon from "@material-ui/icons/shuffle";
 
-import apiRequest from "@/utils/request";
+import Play from "@/utils/play";
+import ApiRequest from "@/utils/request";
 import ItemList from "./ItemList";
 
 type ShuffleButtonProps = {
@@ -10,16 +11,12 @@ type ShuffleButtonProps = {
 
 const ShuffleButton = ({ body }: ShuffleButtonProps) => {
   const shuffleAll = () => {
-    apiRequest({
+    ApiRequest({
       endpoint: "/me/player/shuffle?state=true",
       method: "put"
     });
 
-    apiRequest({
-      endpoint: "/me/player/play",
-      method: "put",
-      body: JSON.stringify(body)
-    });
+    Play(body);
   };
 
   return (

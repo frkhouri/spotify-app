@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, MenuItem } from "@material-ui/core";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 
 type PreviewCardMenuProps = {
   track: {
@@ -15,7 +15,7 @@ type PreviewCardMenuProps = {
 
 const PreviewCardMenu = ({ track, open, setOpen }: PreviewCardMenuProps) => {
   const addToQueue = () => {
-    apiRequest({
+    ApiRequest({
       endpoint: `/me/player/queue?uri=${track.uri}`,
       method: "post"
     }).then(setOpen(null));

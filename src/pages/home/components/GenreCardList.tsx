@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import apiRequest from "@/utils/request";
+import ApiRequest from "@/utils/request";
 import OneLineGridList from "../../explore/components/OneLineGridList";
 
 type GenreCardListProps = {
@@ -12,7 +12,7 @@ const GenreCardList = ({ genre }: GenreCardListProps) => {
 
   useEffect(() => {
     genre &&
-      apiRequest({
+      ApiRequest({
         endpoint: `/search?q="the%20sound%20of%20${genre}"&type=playlist&limit=1`
       }).then((response: any) => {
         if (

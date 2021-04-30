@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, GridList, GridListTile, Typography } from "@material-ui/core";
 import { history } from "umi";
 
-import apiRequest from "@/utils/request";
+import Play from "@/utils/play";
+import ApiRequest from "@/utils/request";
 import OneLineGridTile from "./OneLineGridTile";
 import styles from "../styles.less";
 
@@ -19,21 +20,17 @@ const OneLineGridList = ({ item }: OneLineGridListProps) => {
   const [tracks, setTracks] = useState([]);
 
   const shuffle = () => {
-    apiRequest({
+    ApiRequest({
       endpoint: "/me/player/shuffle?state=true",
       method: "put"
     });
 
-    apiRequest({
-      endpoint: "/me/player/play",
-      method: "put",
-      body: JSON.stringify({ context_uri: item.uri })
-    });
+    Play(body);
   };
 
   useEffect(() => {
     item.id &&
-      apiRequest({
+      ApiRequest({
         endpoint: `/playlists/${item.id}/tracks?limit=6`
       }).then(response => setTracks(response.items));
   }, [item]);

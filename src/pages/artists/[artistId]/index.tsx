@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'umi';
 
-import apiRequest from '@/utils/request';
+import ApiRequest from '@/utils/request';
 import ImageHeader from '@/pages/components/ImageHeader';
 import CustomTabs from '@/pages/components/CustomTabs';
 import TopTracks from './components/TopTracks';
@@ -29,17 +29,17 @@ const ArtistPage = () => {
 
     useEffect(() => {
         !artist.name ? (
-            apiRequest({
+            ApiRequest({
                 endpoint: `/artists/${artistId}`
             })
                 .then(response => setArtist(response)),
 
-            apiRequest({
+            ApiRequest({
                 endpoint: `/artists/${artistId}/top-tracks?country=from_token`
             })
                 .then(response => setTopTracks(response.tracks)),
 
-            apiRequest({
+            ApiRequest({
                 endpoint: `/artists/${artistId}/albums?country=from_token&limit=50&include_groups=album`
             })
                 .then(response => {
@@ -53,7 +53,7 @@ const ArtistPage = () => {
                     }, response.items[0])
                 })
         ) : (
-            apiRequest({
+            ApiRequest({
                 endpoint: `/search?q=this%20is%20${artist.name}&type=playlist&limit=1`
             })
                 .then(response => {

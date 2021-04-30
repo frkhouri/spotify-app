@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { List } from '@material-ui/core';
 import { useParams } from 'umi';
 
-import apiRequest from '@/utils/request';
+import ApiRequest from '@/utils/request';
 import CustomTabs from '@/pages/components/CustomTabs';
 import ImageHeader from '@/pages/components/ImageHeader';
 import ItemList from '@/pages/components/ItemList';
@@ -29,12 +29,12 @@ const RadioPage = () => {
 
     useEffect(() => {
         !artist.id ? (
-            apiRequest({
+            ApiRequest({
                 endpoint: `/artists/${artistId}`
             })
                 .then(response => setArtist(response))
         ) : (
-            apiRequest({
+            ApiRequest({
                 endpoint: `/recommendations?seed_artists=${artist.id}&limit=50`
             })
                 .then(response => setTracks(response.tracks))

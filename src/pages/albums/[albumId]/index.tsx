@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { List } from '@material-ui/core';
 import { useParams } from 'umi';
 
-import apiRequest from '@/utils/request';
+import ApiRequest from '@/utils/request';
 import ImageHeader from '@/pages/components/ImageHeader';
 import CustomTabs from '@/pages/components/CustomTabs';
 import ItemList from '@/pages/components/ItemList';
@@ -33,14 +33,14 @@ const AlbumPage = () => {
         const returnedArtists = [];
 
         !album.id ? (
-            apiRequest({
+            ApiRequest({
                 endpoint: `/albums/${albumId}`
             })
                 .then(response => setAlbum(response))
                 .finally(() => setLoadingAlbum(false))
         ) : (
             album.artists.forEach((artist: object) => {
-                apiRequest({
+                ApiRequest({
                     endpoint: `/artists/${artist.id}`
                 })
                     .then(response => {
