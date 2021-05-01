@@ -78,7 +78,7 @@ const ArtistPage = () => {
             {artist.images &&
                 <>
                     <ImageHeader item={artist} imageUrl={artist.images[0].url} />
-                    <CustomTabs tabNames={tabNames} tabContents={tabContents} />
+                    <TopTracks tracks={topTracks} />
                 </>
             }
         </>

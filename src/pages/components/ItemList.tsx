@@ -23,7 +23,7 @@ const ItemList = ({
   action
 }: ItemListProps) => {
   return (
-    <ListItem button disableGutters onClick={() => action(item)}>
+    <ListItem button onClick={() => action(item)}>
       <Grid container alignItems="center">
         {number && (
           <Grid item xs={1}>
