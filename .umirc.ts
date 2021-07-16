@@ -83,8 +83,8 @@ export default defineConfig({
           exact: true
         },
         {
-          path: "/radios/:artistId",
-          component: "@/pages/radios/[artistId]/index",
+          path: "/radios/:type/:id",
+          component: "@/pages/radios/[type]/[id]/index",
           exact: true
         }
       ]

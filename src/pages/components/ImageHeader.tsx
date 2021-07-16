@@ -1,9 +1,11 @@
-import React from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { history } from "umi";
+import React from 'react';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import RadioOutlinedIcon from '@material-ui/icons/RadioOutlined';
+import { history } from 'umi';
 
-import styles from "./styles.less";
+import ShuffleFab from './ShuffleFab';
+import styles from './styles.less';
 
 type ImageHeaderProps = {
   item: any;
@@ -16,6 +18,11 @@ const ImageHeader = ({ item, imageUrl }: ImageHeaderProps) => {
       <AppBar elevation={0} color="transparent">
         <Toolbar>
           <ArrowBackIcon htmlColor="white" onClick={() => history.goBack()} />
+          <RadioOutlinedIcon
+            htmlColor="white"
+            onClick={() => history.push(`/radios/${item.type}/${item.id}`)}
+            style={{ marginLeft: 'auto' }}
+          />
         </Toolbar>
       </AppBar>
       <div
@@ -32,6 +39,7 @@ const ImageHeader = ({ item, imageUrl }: ImageHeaderProps) => {
           {item.name}
         </Typography>
       </div>
+      <ShuffleFab body={{ context_uri: item.uri }} />
     </>
   );
 };
