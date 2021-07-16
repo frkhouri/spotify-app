@@ -10,7 +10,7 @@ import ApiRequest from '@/utils/request';
 import Play from '@/utils/play';
 import ItemList from '@/pages/components/ItemList';
 import ListHeading from '@/pages/components/ListHeading';
-import styles from "../styles.less";
+import styles from '../styles.less';
 
 type TopTracksProps = {
   tracks: Array<object>;
@@ -19,16 +19,16 @@ type TopTracksProps = {
 const TopTracks = ({ tracks }: TopTracksProps) => {
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   const playTopTracks = (item: object) => {
     const trackUris = tracks.map(track => track.uri);
     const body = {
-      'uris': trackUris,
-      'offset': {
-        'uri': item.uri,
+      uris: trackUris,
+      offset: {
+        uri: item.uri,
       },
     };
 
@@ -42,26 +42,46 @@ const TopTracks = ({ tracks }: TopTracksProps) => {
 
   return (
     <>
-      <ListHeading heading='Top Tracks' />
+      <ListHeading heading="Top Tracks" />
       <List>
-        {tracks && (tracks.slice(0, 5).map((track: object, index: number) => (
-          <ItemList item={track} imageUrl={track.album.images[0].url} number={index + 1} action={playTopTracks} />
-        )))}
-        <Accordion  expanded={expanded} onChange={handleChange('panel')} className={styles.accordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          className={styles.accordionTitle}
+        {tracks &&
+          tracks
+            .slice(0, 5)
+            .map((track: object, index: number) => (
+              <ItemList
+                item={track}
+                imageUrl={track.album.images[0].url}
+                number={index + 1}
+                action={playTopTracks}
+              />
+            ))}
+        <Accordion
+          expanded={expanded}
+          onChange={handleChange('panel')}
+          className={styles.accordion}
         >
-          <Typography>{expanded ? "Show Less" : "Show More"}</Typography>
-        </AccordionSummary>
-        <AccordionDetails className={styles.accordionDetails}>
-        {tracks && (tracks.slice(5).map((track: object, index: number) => (
-          <ItemList item={track} imageUrl={track.album.images[0].url} number={index + 6} action={playTopTracks} />
-        )))}
-        </AccordionDetails>
-      </Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className={styles.accordionTitle}
+          >
+            <Typography>{expanded ? 'Show Less' : 'Show More'}</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={styles.accordionDetails}>
+            {tracks &&
+              tracks
+                .slice(5)
+                .map((track: object, index: number) => (
+                  <ItemList
+                    item={track}
+                    imageUrl={track.album.images[0].url}
+                    number={index + 6}
+                    action={playTopTracks}
+                  />
+                ))}
+          </AccordionDetails>
+        </Accordion>
       </List>
     </>
   );

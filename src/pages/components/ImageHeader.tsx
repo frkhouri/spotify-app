@@ -1,10 +1,11 @@
-import React from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import RadioOutlinedIcon from "@material-ui/icons/RadioOutlined";
-import { history } from "umi";
+import React from 'react';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import RadioOutlinedIcon from '@material-ui/icons/RadioOutlined';
+import { history } from 'umi';
 
-import styles from "./styles.less";
+import ShuffleFab from './ShuffleFab';
+import styles from './styles.less';
 
 type ImageHeaderProps = {
   item: any;
@@ -20,7 +21,7 @@ const ImageHeader = ({ item, imageUrl }: ImageHeaderProps) => {
           <RadioOutlinedIcon
             htmlColor="white"
             onClick={() => history.push(`/radios/${item.type}/${item.id}`)}
-            style={{ marginLeft: "auto" }}
+            style={{ marginLeft: 'auto' }}
           />
         </Toolbar>
       </AppBar>
@@ -38,6 +39,7 @@ const ImageHeader = ({ item, imageUrl }: ImageHeaderProps) => {
           {item.name}
         </Typography>
       </div>
+      <ShuffleFab body={{ context_uri: item.uri }} />
     </>
   );
 };
