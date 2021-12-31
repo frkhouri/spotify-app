@@ -5,10 +5,9 @@ const manifestName = "manifest.webmanifest";
 
 export default defineConfig({
   define: {
-    client_id: '8844a79bfd4d467e9ed94005a6b9da4b',
+    client_id: 'client_id',
     response_type: 'token',
-    //redirect_uri: "https://spotify-app-5bb09.web.app",
-    redirect_uri: 'http://10.0.0.244:8000',
+    redirect_uri: "https://spotify-app-5bb09.web.app",
     scope:
       'user-top-read playlist-read-private user-read-recently-played user-follow-read user-modify-playback-state user-library-read user-library-modify user-read-playback-state',
   },
