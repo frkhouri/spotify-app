@@ -1,0 +1,95 @@
+.explorePage {
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+.exploreBar {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.searchWrapper {
+  padding: 15px;
+  min-width: 100%;
+}
+
+.searchField {
+  //margin: 5px !important;
+  background: #efefef;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.searchResultsWrapper {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 15px;
+  margin-left: -15px;
+  padding: 0px 20px;
+}
+
+.chipsWrapper {
+  white-space: nowrap;
+  overflow: auto;
+  max-width: 100%;
+  padding: 0px 15px 7px;
+  margin-top: -8px;
+}
+
+.chipsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.heading {
+  padding: 5px 15px;
+}
+
+.exploreGridWrapper {
+  overflow: hidden;
+}
+
+.exploreGridTile {
+  display: block;
+  width: 100%;
+  border-radius: 0px !important;
+}
+
+.exploreGridTileImage {
+  padding-top: 100%;
+}
+
+.tileSkeleton {
+  padding: 50%;
+}
+
+.loadingSpinner {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.endMessage {
+  padding: 10px;
+}
+
+:global {
+  .MuiChip-root.MuiChip-sizeSmall {
+    margin: 0 2.5px;
+    border-radius: 8px;
+  }
+
+  .MuiChip-root.MuiChip-sizeSmall:first-of-type {
+    margin-left: 0;
+  }
+
+  .MuiChip-root.MuiChip-sizeSmall:last-of-type {
+    margin-right: 0;
+  }
+
+  .MuiAppBar-root.MuiAppBar-positionFixed {
+    z-index: 3;
+  }
+}
