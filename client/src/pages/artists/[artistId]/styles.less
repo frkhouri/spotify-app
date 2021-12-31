@@ -1,0 +1,27 @@
+.heading {
+    padding: 15px 15px 0 15px;
+}
+
+.accordion {
+    display: flex !important;
+    flex-direction: column;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+.accordionTitle {
+order: 2;
+}
+
+.accordionDetails {
+    flex-direction: column;
+    padding: 0 !important;
+}
+
+:global {  
+    .MuiAccordion-root {
+        &::before {
+            display: none;
+        }
+    }
+}

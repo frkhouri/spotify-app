@@ -1,0 +1,68 @@
+.listHeading {
+  padding: 5px 15px;
+}
+
+.tallCardWrapper {
+  padding: 5px 15px 15px 15px;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tallCardWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tallCard {
+  width: 200px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: 12px !important;
+  margin: 0 3px;
+  display: inline-block;
+}
+
+.tallCard:first-of-type {
+  margin-left: 0;
+}
+
+.tallCard:last-of-type {
+  // margin-right: 15px;
+}
+
+.tallCardInfoWrapper {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  min-height: 30%;
+  padding: 20px;
+  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+  white-space: normal;
+}
+
+.tallCardTitle {
+  color: white;
+}
+
+.tallCardArtist {
+  color: white;
+}
+
+.tallCardSkeleton {
+  display: inline-block !important;
+  border-radius: 12px !important;
+  margin: 0 3px;
+}
+
+.playlistHeader {
+  width: 100%;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.playlistHeaderSkeleton {
+  width: 100%;
+  padding: 10px 15px 0px 15px;
+  display: flex;
+  justify-content: space-between;
+}
