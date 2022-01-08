@@ -12,18 +12,26 @@ import ItemList from '@/components/ItemList';
 import styles from '../styles.less';
 
 type TopTracksProps = {
-  tracks: Array<object>;
+  tracks: Array<TrackProps>;
 };
+
+type TrackProps = {
+  id: string;
+  album: {
+    images: Array<{url: string}>
+  };
+  uri: string;
+}
 
 const TopTracks = ({ tracks }: TopTracksProps) => {
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+  const handleChange = (panel: string) => (_event: any, isExpanded: boolean) => {
+    setExpanded(isExpanded ? !!panel : false);
   };
 
-  const playTopTracks = (item: object) => {
-    const trackUris = tracks.map((track) => track.uri);
+  const playTopTracks = (item: TrackProps) => {
+    const trackUris = tracks.map((track: TrackProps) => track.uri);
     const body = {
       uris: trackUris,
       offset: {
@@ -48,12 +56,13 @@ const TopTracks = ({ tracks }: TopTracksProps) => {
         {tracks &&
           tracks
             .slice(0, 5)
-            .map((track: object, index: number) => (
+            .map((track: TrackProps, index: number) => (
               <ItemList
                 item={track}
                 imageUrl={track.album.images[0].url}
                 number={index + 1}
                 action={playTopTracks}
+                key={track.id}
               />
             ))}
         <Accordion
@@ -73,12 +82,13 @@ const TopTracks = ({ tracks }: TopTracksProps) => {
             {tracks &&
               tracks
                 .slice(5)
-                .map((track: object, index: number) => (
+                .map((track: TrackProps, index: number) => (
                   <ItemList
                     item={track}
                     imageUrl={track.album.images[0].url}
                     number={index + 6}
                     action={playTopTracks}
+                    key={track.id}
                   />
                 ))}
           </AccordionDetails>

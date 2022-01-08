@@ -110,7 +110,7 @@ const TallCards = ({ items, isLoading }: TallCardsProps) => {
               /> */}
               </React.Fragment>
             ))
-          : [1, 2, 3, 4].map((a, i) => (
+          : [1, 2, 3, 4].map((_a, i) => (
               <Skeleton
                 key={i}
                 variant="rect"
@@ -125,5 +125,3 @@ const TallCards = ({ items, isLoading }: TallCardsProps) => {
 };
 
 export default TallCards;
-//   <SmallCard item={item} key={item.id} />)
-//   : [1, 2].map(() => <SmallCardSkeleton />)

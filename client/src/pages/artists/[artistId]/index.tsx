@@ -45,7 +45,7 @@ const ArtistPage = () => {
   // ];
 
   useEffect(() => {
-    loadingArtist && getArtist();
+    artistId && getArtist();
 
     // : (useRequest({
     //     endpoint: `search?q=this%20is%20${artist.name}&type=playlist&limit=1`,
@@ -75,7 +75,6 @@ const ArtistPage = () => {
             Discography
           </Typography>
           <MediumCards items={albums} />
-          <div style={{ height: '85px' }}></div>
         </>
       )}
     </>

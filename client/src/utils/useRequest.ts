@@ -26,10 +26,13 @@ async function useRequest({ endpoint, method, body }: useRequestProps) {
       };
       const searchParams = Object.keys(authBody)
         .map((key) => {
-          return encodeURIComponent(key) + '=' + encodeURIComponent(authBody[key]);
+          return (
+            encodeURIComponent(key) + '=' + encodeURIComponent(authBody[key])
+          );
         })
         .join('&');
-      request(pkce.config.token_endpoint, {
+
+      await request(pkce.config.token_endpoint, {
         method: 'post',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -48,7 +51,7 @@ async function useRequest({ endpoint, method, body }: useRequestProps) {
           console.log('catch');
           console.log(e);
           console.log(url);
-          history.push('/login');
+          // history.push('/login');
         });
     }
   }

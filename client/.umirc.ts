@@ -1,16 +1,9 @@
 import { defineConfig } from 'umi';
-import { InjectManifest } from "workbox-webpack-plugin";
+import { InjectManifest } from 'workbox-webpack-plugin';
 
-const manifestName = "manifest.webmanifest";
+const manifestName = 'manifest.webmanifest';
 
 export default defineConfig({
-  define: {
-    client_id: 'client_id',
-    response_type: 'token',
-    redirect_uri: "https://spotify-app-5bb09.web.app",
-    scope:
-      'user-top-read playlist-read-private user-read-recently-played user-follow-read user-modify-playback-state user-library-read user-library-modify user-read-playback-state',
-  },
   nodeModulesTransform: {
     type: 'none',
   },
@@ -47,23 +40,33 @@ export default defineConfig({
           component: '@/pages/explore/index',
         },
         {
-          path: "/artists/:artistId",
-          component: "@/pages/artists/[artistId]/index",
-          exact: true
+          path: '/artists/:artistId',
+          component: '@/pages/artists/[artistId]/index',
+          exact: true,
+        },
+        {
+          path: '/albums/:albumId',
+          component: '@/pages/albums/[albumId]/index',
+          exact: true,
+        },
+        {
+          path: '/categories/:categoryId',
+          component: '@/pages/categories/[categoryId]/index',
+          exact: true,
         },
       ],
     },
   ],
 
   copy: [`/src/${manifestName}`],
-  links: [{ rel: "manifest", href: `/${manifestName}` }],
+  links: [{ rel: 'manifest', href: `/${manifestName}` }],
   chainWebpack(memo) {
-    memo.plugin("workbox").use(InjectManifest, [
+    memo.plugin('workbox').use(InjectManifest, [
       {
-        swSrc: "./src/service-worker.ts",
-        swDest: "sw.js",
-        exclude: [/\.map$/, /favicon\.ico$/, /^manifest.*\.js?$/]
-      }
+        swSrc: './src/service-worker.ts',
+        swDest: 'sw.js',
+        exclude: [/\.map$/, /favicon\.ico$/, /^manifest.*\.js?$/],
+      },
     ]);
-  }
+  },
 });
