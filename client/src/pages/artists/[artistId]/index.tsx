@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { Typography } from '@material-ui/core';
+import { Divider, Typography } from '@material-ui/core';
 import { useParams } from 'umi';
 
 import ImageHeader from '@/components/ImageHeader';
@@ -33,36 +33,8 @@ const ArtistPage = () => {
   const [thisIsPlaylist, setThisIsPlaylist] = useState({});
   const [radio, setRadio] = useState({});
 
-  // const tabNames = ['Overview', 'Albums', 'Related'];
-  // const tabContents = [
-  //   <>
-  //     <ShuffleButton body={{ context_uri: artist.uri }} />
-  //     <CardGrid items={[thisIsPlaylist, radio]} heading="Featured on" />
-  //     <TopTracks tracks={topTracks} />
-  //   </>,
-  //   <CardGrid items={albums} />,
-  //   'page 3',
-  // ];
-
   useEffect(() => {
     artistId && getArtist();
-
-    // : (useRequest({
-    //     endpoint: `search?q=this%20is%20${artist.name}&type=playlist&limit=1`,
-    //   }).then((response) => {
-    //     if (
-    //       response.playlists.items[0].owner.id == 'spotify' &&
-    //       response.playlists.items[0].name == `This Is ${artist.name}`
-    //     ) {
-    //       setThisIsPlaylist(response.playlists.items[0]);
-    //     }
-    //   }),
-    //   setRadio({
-    //     id: artist.id,
-    //     name: artist.name + ' Radio',
-    //     images: artist.images,
-    //     type: 'radio',
-    //   }));
   }, [artistId]);
 
   return (
@@ -71,6 +43,7 @@ const ArtistPage = () => {
         <>
           <ImageHeader item={artist} imageUrl={artist.images[0].url} />
           <TopTracks tracks={topTracks} />
+          <Divider />
           <Typography variant="h6" className={styles.heading}>
             Discography
           </Typography>
