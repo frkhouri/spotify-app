@@ -10,25 +10,32 @@ type PlayProps = {
 };
 
 async function play({ context, tracks, shuffle, offset }: PlayProps) {
-  useRequest({
+  await useRequest({
     endpoint: 'me/player',
   }).then((response) => {
     if (!response) {
       useRequest({
         endpoint: 'me/player/devices',
-      }).then((response) => {
-        if (response.devices[0]) {
-          const body = {
-            device_ids: [response.devices[0].id],
-          };
+      })
+        .then((response) => {
+          if (response.devices.length) {
+            const body = {
+              device_ids: [response.devices[0].id],
+            };
 
-          useRequest({
-            endpoint: 'me/player',
-            method: 'put',
-            body: JSON.stringify(body),
-          });
-        }
-      });
+            useRequest({
+              endpoint: 'me/player',
+              method: 'put',
+              body: JSON.stringify(body),
+            });
+          } else {
+            alert('No devices found');
+            return;
+          }
+        })
+        .catch(() => {
+          return;
+        });
     }
   });
 

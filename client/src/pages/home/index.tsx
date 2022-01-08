@@ -17,7 +17,7 @@ const HomePage = () => {
       setArtistsLoading(false);
 
       let artistGenres: string[] = [];
-      res?.items.forEach((artist: {genres: string[]}) => {
+      res?.items.forEach((artist: { genres: string[] }) => {
         artistGenres.push(...artist.genres);
       });
       artistGenres = _.uniq(artistGenres);
@@ -32,7 +32,11 @@ const HomePage = () => {
     await useRequest({
       endpoint: 'me/top/tracks?limit=10&time_range=short_term',
     }).then((res) => {
-      const trackAlbums = _.uniqBy(res.items, 'album.id');
+      const trackAlbums = _.uniqBy(res.items, 'album.id').map(
+        (track: { album: Object }) => {
+          return track.album;
+        },
+      );
 
       setAlbums(trackAlbums);
       setAlbumsLoading(false);
@@ -66,10 +70,10 @@ const HomePage = () => {
       <Typography variant="h6" className={styles.listHeading}>
         Playlists
       </Typography>
-      {!genresLoading && genres.map((genre) => (
-        <GenrePlaylist genre={genre} />
-      ))}
-      <div style={{height: '85px'}}></div>
+      {!genresLoading &&
+        genres.map((genre: { name: string }) => (
+          <GenrePlaylist key={genre.name} genre={genre} />
+        ))}
     </>
   );
 };

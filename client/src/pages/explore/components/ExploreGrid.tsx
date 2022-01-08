@@ -17,24 +17,50 @@ type ExploreGridProps = {
   recentTrackIds: string;
 };
 
+type TrackProps = {
+  id: string;
+  album: {
+    id: string;
+  };
+};
+
 const ExploreGrid = ({ recentTrackIds }: ExploreGridProps) => {
-  async function getTracks(popularity: number) {
-    recentTrackIds &&
-      (await useRequest({
-        endpoint: `recommendations?seed_tracks=${recentTrackIds}&max_popularity=${popularity}`,
-      }).then((res) => {
-        const allTracks = _.uniqBy([...tracks, ...res.tracks], 'id');
-        if (allTracks.length === tracks.length) {
-          popularity === 100
-            ? (setEndReached(true), console.log('end reached'))
-            : (setMaxPopularity(popularity + 10), getTracks(popularity + 10));
+  async function getTracks() {
+    const allTracks: TrackProps[] = [];
+    let popularity = maxPopularity;
+
+    if (recentTrackIds) {
+      while (
+        _.uniqBy([...tracks, ...allTracks], 'album.id').length <
+        tracks.length + 9
+      ) {
+        const returnedTracks = await useRequest({
+          endpoint: `recommendations?seed_tracks=${recentTrackIds}&max_popularity=${popularity}`,
+        }).then((res) => {
+          return res.tracks;
+        });
+
+        const newTracks = returnedTracks.filter(
+          (returnedTrack: TrackProps) =>
+            allTracks.findIndex(
+              (track: TrackProps) => track.album.id === returnedTrack.album.id,
+            ) === -1 &&
+            tracks.findIndex(
+              (track: TrackProps) => track.album.id === returnedTrack.album.id,
+            ),
+        );
+
+        if (newTracks.length === 0) {
+          popularity < 100 ? (popularity += 10) : setEndReached(true);
+        } else {
+          allTracks.push(...newTracks);
         }
-        
-        setTracks(allTracks);
-        setIsLoading(false);
-      }));
-      
-    return;
+      }
+
+      setTracks(_.uniqBy([...tracks, ...allTracks], 'album.id').slice(0, tracks.length + 9));
+      setIsLoading(false);
+      setMaxPopularity(popularity);
+    }
   }
 
   const [tracks, setTracks] = useState([]);
@@ -44,7 +70,7 @@ const ExploreGrid = ({ recentTrackIds }: ExploreGridProps) => {
 
   useEffect(() => {
     if (recentTrackIds) {
-      getTracks(maxPopularity);
+      getTracks();
     }
   }, [recentTrackIds]);
 
@@ -56,12 +82,20 @@ const ExploreGrid = ({ recentTrackIds }: ExploreGridProps) => {
       <div className={styles.exploreGridWrapper}>
         <InfiniteScroll
           dataLength={tracks.length}
-          next={() => getTracks(maxPopularity)}
+          next={() => getTracks()}
           hasMore={!endReached}
           loader={
-            <div className={styles.loadingSpinner}>
-              <CircularProgress />
-            </div>
+            <ImageList cols={3} rowHeight={'auto'} gap={3}>
+              {[1, 2, 3].map((_a, i) => (
+                <div key={i} className={styles.exploreGridTile}>
+                  <Skeleton
+                    key={i}
+                    variant="rect"
+                    className={styles.tileSkeleton}
+                  />
+                </div>
+              ))}
+            </ImageList>
           }
           endMessage={
             <Typography
@@ -72,11 +106,11 @@ const ExploreGrid = ({ recentTrackIds }: ExploreGridProps) => {
               You've reached the end
             </Typography>
           }
-          style={{ 'overflowX': 'hidden' }}
+          style={{ overflow: 'hidden' }}
         >
-          <ImageList cols={3} rowHeight={'auto'}>
+          <ImageList cols={3} rowHeight={'auto'} gap={3}>
             {!isLoading
-              ? tracks.map((track: object) => (
+              ? tracks.map((track: TrackProps) => (
                   <ImageListItem key={track.id} cols={1}>
                     <ExploreGridTile track={track} />
                   </ImageListItem>
