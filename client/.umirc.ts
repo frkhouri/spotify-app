@@ -54,6 +54,19 @@ export default defineConfig({
           component: '@/pages/categories/[categoryId]/index',
           exact: true,
         },
+        {
+          path: '/playlists/:playlistId',
+          component: '@/pages/playlists/[playlistId]/index',
+          exact: true,
+        },
+        {
+          path: '/new',
+          component: '@/pages/new/index',
+        },
+        {
+          path: '/users/me',
+          component: '@/pages/users/me/index',
+        },
       ],
     },
   ],

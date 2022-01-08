@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AppBar, Chip, InputBase, Toolbar } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 import { history } from 'umi';
 
 import useRequest from '@/utils/useRequest';
@@ -27,6 +28,7 @@ const ExploreBar = ({}: ExploreBarProps) => {
             fullWidth
             onFocus={() => history.push('/explore/search')}
             className={styles.searchField}
+            startAdornment={<div style={{marginTop: '3px', marginRight: '10px'}}><SearchIcon color='disabled' fontSize='small' /></div>}
           />
         </div>
         <div className={styles.chipsWrapper}>
